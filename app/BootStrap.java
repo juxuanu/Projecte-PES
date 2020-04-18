@@ -10,11 +10,11 @@ public class BootStrap extends Job {
 
     public void doJob() {
         Usuari u = new Usuari("admin", "1234", "admin_blog@gmail.com", "9/7/98");
-        Usuari u2 = new Usuari("Anònim","aBmFtZDV75bggDJ","-","-");
-        if(Usuari.find("byNom","admin").first() == null) 
+        Usuari u2 = new Usuari("<usuari_eliminat>","aBmFtZDV75bggDJ","-","-");
+        if(Usuari.find("byNom","admin").first() == null)
           u.save();
 
-        if(Usuari.find("byNom","Anònim").first() == null)
+        if(Usuari.find("byNom","<usuari_eliminat>").first() == null)
           u2.save();
 
         if(Blog.count() == 0){
