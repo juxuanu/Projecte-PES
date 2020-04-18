@@ -173,6 +173,50 @@ public class Application extends Controller {
     		renderText("El blog no existeix!");
     }
 
+    public static void buscarBlogs(){
+      String n = session.get("user");
+      if(n!=null){
+    		Usuari u = new Usuari(); u.nom = n;
+    		renderArgs.put("user",u);
+    	}
+      render();
+    }
+
+    public static void BuscarBlog(String camp, String searchString){
+      if(Objects.equals(camp,"titol")){
+        List<Blog> blogs = Blog.find("byTitol",searchString).fetch();
+        renderArgs.put("blogs",blogs);
+        String n = session.get("user");
+        if(n!=null){
+      		Usuari u = new Usuari(); u.nom = n;
+      		renderArgs.put("user",u);
+      	}
+        renderTemplate("Application/buscarBlogs.html");
+      }
+      if (Objects.equals(camp,"autor")){
+        List<Blog> blogs = Blog.find("byAutor",searchString).fetch();
+        renderArgs.put("blogs",blogs);
+        String n = session.get("user");
+        if(n!=null){
+      		Usuari u = new Usuari(); u.nom = n;
+      		renderArgs.put("user",u);
+      	}
+        renderTemplate("Application/buscarBlogs.html");
+      }
+      if (Objects.equals(camp,"tema")){
+        List<Blog> blogs = Blog.find("byTema",searchString).fetch();
+        renderArgs.put("blogs",blogs);
+        String n = session.get("user");
+        if(n!=null){
+      		Usuari u = new Usuari(); u.nom = n;
+      		renderArgs.put("user",u);
+      	}
+        renderTemplate("Application/buscarBlogs.html");
+      }
+      renderText("Camp '"+ camp +"' no reconegut. Ha de ser: " +
+        "titol, autor o tema");
+    }
+
     public static void CarregarAdminUsuari(){
     	String n = session.get("user");
     	if(n!=null){

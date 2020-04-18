@@ -1,0 +1,64 @@
+#{extends 'main.html' /}
+#{set title:'Resultat búsqueda' /}
+
+<h2>Buscador de blogs</h2>
+
+<div style="display: inline; text-align: center;">
+  #{form @BuscarBlog()}
+  #{field 'camp'}
+  <label>Buscar per:</label>
+  <select name="${field.name}">
+    <option value="titol" name="${field.name}">Títol</option>
+    <option value="tema" name="${field.name}">Tema</option>
+    <option value="autor" name="${field.name}">Autor</option>
+  </select>
+  #{/field}
+  #{field 'searchString'}
+  <input type="text" name="${field.name}"/>
+  #{/field}
+  <button type="submit">Buscar</button>
+  #{/form}
+</div>
+
+#{if 'blogs'}
+<br>
+<center>
+<table>
+    <thead>
+    <tr>
+    	<th>Títol</th>
+        <th>Tema</th>
+        <th>Valoració</th>
+        <th>Autor</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    #{list blogs, as:'blog'}
+    <tr>
+    	<td>${blog.titol}</td>
+        <td>${blog.tema}</td>
+        <td>${blog.valoracio}</td>
+        <td>${blog.autor.nom}</td>
+        <td>
+        	#{form @CarregarBlog()}
+            <p class="buttons">
+            <input type="submit" value="Mostrar" id="megaboto"/>
+            <input type="hidden" name="id" value="${blog.id}" />
+            </p>
+            #{/form}
+        </td>
+    </tr>
+    #{/list}
+    </tbody>
+</table>
+</center>
+
+#{/if}
+#{else}
+
+<p style="text-align: center;">
+    No hi han resultats
+</p>
+
+#{/else}
