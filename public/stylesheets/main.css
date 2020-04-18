@@ -11,7 +11,7 @@ td {
 	text-align: center;
 	background-color: darkgreen;
 	animation-name: arcoiris;
-	animation-duration: 4s; 
+	animation-duration: 4s;
 	animation-iteration-count: infinite;
 	animation-direction: alternate;
 }
@@ -64,7 +64,7 @@ textarea {
 
 #megaboto:hover {
 	animation-name: arcoiris;
-	animation-duration: 1s; 
+	animation-duration: 1s;
 	animation-iteration-count: infinite;
 	animation-direction: alternate;
 	cursor: pointer;
@@ -101,8 +101,8 @@ h1 {
 	padding: 4px 6px;
 }
 #comentari {
-	border: solid 1px black; 
-	border-radius: 5px; 
+	border: solid 1px black;
+	border-radius: 5px;
 	margin: 5px 0px;
 }
 
@@ -168,7 +168,7 @@ body{
 .headerbtn {
   background-color: #4CAF50;
   color: white;
-  padding: 16px;
+  padding: 16px 0px 16px 0px;
   font-size: 16px;
   border: none;
   cursor: pointer;
