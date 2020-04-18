@@ -18,9 +18,11 @@
                     <div class="headerbtn">
                       <a class="dropbtn" id="no-deco" href="/application/carregarblognou?blogId=-1">Crear blog</a>
                     </div>
+                #{/if}
                     <div class="headerbtn">
                       <a class="dropbtn" id="no-deco" href="/application/buscarBlogs">Buscar blogs</a>
                     </div>
+                #{if user}
                     <div class="dropdown" style="float: right;">
                         <button class="dropbtn">${user.nom}</button>
                         <div class="dropdown-content">
@@ -31,7 +33,7 @@
                     </div>
                 #{/if}
                 #{else}
-                    <div class="headerbtn">
+                    <div class="headerbtn" style="float: right;">
                         <a class="dropbtn" id="no-deco" href="/Application/index">Login/Registrar-se</a>
                     </div>
                 #{/else}
