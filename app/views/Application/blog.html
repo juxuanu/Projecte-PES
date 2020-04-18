@@ -1,5 +1,5 @@
 #{extends 'main.html' /}
-#{set title:'Blog ${blog.titol}' /}
+#{set title:blog.titol /}
 
 	<div id="contingut-blog">
 		<h2>${blog.titol}</h2>
@@ -8,7 +8,7 @@
 		<div id="text-blog">
 			${blog.contingut}
 		</div>
-		
+
 	</div>
 	<p id="valorar">
 		Valoració: ${blog.valoracio}#{if user} | <a href="/Application/ValorarBlog?idBlog=${blog.id}&val=0"><img src="@{'/public/images/dislike.png'}"></a> <a href="/Application/ValorarBlog?idBlog=${blog.id}&val=1"><img src="@{'/public/images/like.png'}"></a>#{/if}
@@ -37,7 +37,7 @@
 			<input type="hidden" name="blogId" value="${blog.id}" />
         	<input type="submit" value="Comentar"  id="megaboto"/>
     	</p>
-    	
+
     		<label><img src="@{'/public/images/warning.png'}" style="display: inline;"> El comentari serà públic com a <b>${user.nom}</b></label>
     	#{/form}
     	#{/if}
@@ -45,4 +45,3 @@
     		<label>No pots comentar com a anònim. Inicia sessió primer.</label>
     	#{/else}
     	</div>
-    	
