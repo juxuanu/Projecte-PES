@@ -183,7 +183,7 @@ public class Application extends Controller {
     }
 
     public static void BuscarBlog(String camp, String searchString){
-      if(Objects.equals(camp,"titol")){
+      if (Objects.equals(camp,"titol")){
         List<Blog> blogs = Blog.find("byTitol",searchString).fetch();
         renderArgs.put("blogs",blogs);
         String n = session.get("user");
@@ -194,7 +194,7 @@ public class Application extends Controller {
         renderTemplate("Application/buscarBlogs.html");
       }
       if (Objects.equals(camp,"autor")){
-        List<Blog> blogs = Blog.find("byAutor",searchString).fetch();
+        List<Blog> blogs = Blog.find("byAutor.nom",searchString).fetch();
         renderArgs.put("blogs",blogs);
         String n = session.get("user");
         if(n!=null){
