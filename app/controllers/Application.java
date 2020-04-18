@@ -80,12 +80,15 @@ public class Application extends Controller {
       String n = session.get("user");
       if(n!=null){
         Usuari u = Usuari.find("byNom",n).first();
+        Usuari anon = Usuari.find("byNom","Anònim").first();
         if(u!=null){
             for(Blog b: u.blogs){
-              b.delete();
+              b.autor = anon;
+              b.save();
             }
             for(Comentari c: u.comentaris){
-              c.delete();
+              c.autor = anon;
+              c.save();
             }
             u.delete();
             session.remove("user");
