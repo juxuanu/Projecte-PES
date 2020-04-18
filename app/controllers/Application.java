@@ -180,11 +180,11 @@ public class Application extends Controller {
     	String n = session.get("user");
     	if(n!=null){
     		Usuari usuariActual = Usuari.find("byNom", n).first();
-    		if(usuariModificat.contra != null)
+    		if(!isNullOrEmpty(usuariModificat.contra))
     			usuariActual.contra = usuariModificat.contra;
-    		if(usuariModificat.naixament != null)
+    		if(!isNullOrEmpty(usuariModificat.naixament))
     			usuariActual.naixament = usuariModificat.naixament;
-    		if(usuariModificat.mail != null)
+    		if(!isNullOrEmpty(usuariModificat.mail))
     			usuariActual.mail = usuariModificat.mail;
     		usuariActual.save();
     		CarregarAdminUsuari();
