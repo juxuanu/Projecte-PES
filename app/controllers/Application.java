@@ -172,6 +172,18 @@ public class Application extends Controller {
     		renderText("El blog no existeix!");
     }
 
+    public static void ValorarComentari(int idComentari, int val){
+      Comentari c = Comentari.find("byId",(long)idComentari).first();
+      if(c!=null){
+        if(val==1)
+          c.valoracio += 1;
+        else
+          c.valoracio -= 1;
+        c.save();
+        CarregarBlog(c.blog.id);
+      }
+    }
+
     public static void buscarBlogs(){
       String n = session.get("user");
       if(n!=null){

@@ -18,7 +18,7 @@
 		<div id="comentari">
 			<div id="header-comentari">
     			<td><b style="color:black;">#{a @LlistaBlogsPerUsuari(comentari.autor.nom)}${comentari.autor.nom}#{/a}</b> ha comentat:</td>
-        		<td><div style="float: right;"> Valoració: ${comentari.valoracio}</div> </td>
+        	<td><div style="float: right; display:inline;"> Valoració: ${comentari.valoracio} | #{if user} <a href="/Application/ValorarComentari?idComentari=${comentari.id}&val=0"><img src="@{'/public/images/dislike.png'}"></a> <a href="/Application/ValorarComentari?idComentari=${comentari.id}&val=1"><img src="@{'/public/images/like.png'}"></a>#{/if}</div></td>
         	</div>
         	<hr>
         	<td><p id="contingut-comentari">${comentari.contingut}</p></td>
