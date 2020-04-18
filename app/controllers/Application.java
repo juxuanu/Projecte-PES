@@ -50,6 +50,8 @@ public class Application extends Controller {
         if(validation.hasErrors()) {
             renderText("Cap usuari a visualitzar.");
         }
+        if(Objects.equals(nom,"<usuari_eliminat>"))
+          renderText("Usuari no existeix");
         Usuari u = Usuari.find("byNom",nom).first();
         if (u!=null) {
             List<Blog> blogs = u.blogs;
