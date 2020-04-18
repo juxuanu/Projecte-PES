@@ -39,7 +39,7 @@
     	<td>${blog.titol}</td>
         <td>${blog.tema}</td>
         <td>${blog.valoracio}</td>
-        <td>${blog.autor.nom}</td>
+        <td>#{a @LlistaBlogsPerUsuari(blog.autor.nom)}${blog.autor.nom}#{/a}</td>
         <td>
         	#{form @CarregarBlog()}
             <p class="buttons">

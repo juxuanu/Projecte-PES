@@ -17,7 +17,7 @@
 		<tr>
 		<div id="comentari">
 			<div id="header-comentari">
-    			<td><b>${comentari.autor.nom}</b> ha comentat:</td>
+    			<td><b style="color:black;">#{a @LlistaBlogsPerUsuari(comentari.autor.nom)}${comentari.autor.nom}#{/a}</b> ha comentat:</td>
         		<td><div style="float: right;"> Valoració: ${comentari.valoracio}</div> </td>
         	</div>
         	<hr>
