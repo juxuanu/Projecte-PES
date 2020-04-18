@@ -27,7 +27,7 @@
 <label>
 	Text
 </label>
-<textarea name="${field.name}" id="textBlog"></textarea> 
+<textarea name="${field.name}" id="textBlog">#{if blog} ${blog.contingut} #{/if}</textarea>
 #{/field}
 <br><br><br>
 
@@ -44,9 +44,10 @@
 #{if blog}
 
 <script type="text/javascript">
-	document.getElementById("titolBlog").setAttribute('value',"${blog.titol}");
-	document.getElementById("temaBlog").setAttribute('value',"${blog.tema}");
-	document.getElementById("textBlog").setAttribute('value',"${blog.contingut}");
+	window.onload = function(){
+		document.getElementById("titolBlog").setAttribute('value',"${blog.titol}");
+		document.getElementById("temaBlog").setAttribute('value',"${blog.tema}");
+	}
 </script>
 
 #{/if}

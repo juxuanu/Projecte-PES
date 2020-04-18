@@ -127,7 +127,6 @@ public class Application extends Controller {
     	else{
     		renderText("Login primer!");
     	}
-
     	if(blogId>0){	//Això vol dir que estem editant un blog, no creant-lo
     		Blog b = Blog.find("byId",(long)blogId).first();
     		if(b==null) renderText("El blog a modificar no existeix!");
