@@ -140,15 +140,12 @@ body{
 }
 
 #valorar{
-	text-align: right;
+	display: inline;
 }
-#valorar img{
-	padding: 1px 5px;
-	transition: width 2s;
+#valorar a:hover{
+  background-color: yellow;
 }
-#valorar img:hover {
-	width: 36px;
-}
+
 
 #modificar-usuari {
 	text-align: justify;

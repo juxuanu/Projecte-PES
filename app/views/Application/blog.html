@@ -4,15 +4,27 @@
 	<div id="contingut-blog">
 		<h2>${blog.titol}</h2>
 		<h3>Tema: ${blog.tema}</h3>
+		<h3>Autor: ${blog.autor.nom}</h3>
 		<br>
 		<div id="text-blog">
 			${blog.contingut}
 		</div>
-
+<br>
 	</div>
-	<p id="valorar">
+	<div id="valorar">
+	<p style="float:right;">
 		Valoració: ${blog.valoracio}#{if user} | <a href="/Application/ValorarBlog?idBlog=${blog.id}&val=0"><img src="@{'/public/images/dislike.png'}"></a> <a href="/Application/ValorarBlog?idBlog=${blog.id}&val=1"><img src="@{'/public/images/like.png'}"></a>#{/if}
-	</p><br>
+	</p>
+		#{if blog.autor.nom == user.nom}
+		#{form @CarregarBlogNou()}
+			<p class="buttons" style="float: left;">
+				<input type="hidden" name="blogId" value="${blog.id}" />
+				<input type="submit" value="Editar" id="megaboto"/>
+			</p>
+		#{/form}
+		#{/if}
+	</div>
+	<div style="clear:both;">
 		#{list blog.comentaris, as:'comentari'}
 		<tr>
 		<div id="comentari">
@@ -44,3 +56,4 @@
     		<label>No pots comentar com a anònim. Inicia sessió primer.</label>
     	#{/else}
     	</div>
+	</div>
