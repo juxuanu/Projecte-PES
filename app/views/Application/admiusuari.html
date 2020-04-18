@@ -1,0 +1,85 @@
+#{extends 'main.html' /}
+#{set title:'Configuració d\'usuari' /}
+
+
+
+<div id="modificar-usuari">
+#{if user}
+<center>
+    <h2>Modificació de les dades d'usuari</h2>
+
+<table>
+#{form @ModificarUsuari()}
+
+    <tr>
+    	<td>
+        	Nom d'usuari:
+		</td>
+		<td>
+			<p class="field">
+				<input type="text"  size="19" name="disabled" value="${user.nom}" disabled/>
+			</p>
+		</td>
+	</tr>
+
+
+ #{field 'usuariModificat.contra'}
+    <tr>
+    	<td>
+        	Contrasenya nova:
+		</td>
+		<td>
+			<p class="field">
+				<input type="password"  size="19" name="${field.name}"/>
+			</p>
+		</td>
+	</tr>
+    #{/field}
+
+#{field 'usuariModificat.mail'}
+    <tr>
+    	<td>
+        	Correu electrònic:
+		</td>
+		<td>
+			<p class="field">
+				<input type="text"  size="19" name="${field.name}" value="${user.mail}" />
+			</p>
+		</td>
+	</tr>
+#{/field}
+
+#{field 'usuariModificat.naixament'}
+    <tr>
+    	<td>
+        	Data de naixament:
+		</td>
+		<td>
+			<p class="field">
+				<input type="text"  size="19" name="${field.name}" value="${user.naixament}" />
+			</p>
+		</td>
+	</tr>
+#{/field}
+
+<tr>
+    	<td></td>
+		<td>
+			 <p class="buttons" style="display: inline-block; ">
+        <input type="submit" value="Actualitzar dades"  id="megaboto"/>
+    </p>
+		</td>
+	</tr>
+
+
+
+    #{/form}
+</table>
+<hr/>
+#{a @BorrarUsuari()}<p>Borrar usuari</p> #{/a}
+</center>
+#{/if}
+#{else}
+	<center> Inicia sessió per modificar el teu usuari </center>
+#{/else}
+</div>

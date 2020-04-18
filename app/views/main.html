@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta charset="${_response_encoding}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/upc.ico'}">
+    </head>
+    <body>
+        <div id="contenidor">
+            <div class="titol">
+                <h1 id="titol_main">Projecte PES</h1>
+            </div>
+            <div id="login-header">
+                #{if user}
+                    <div class="headerbtn">
+                        <a class="dropbtn" id="no-deco" href="/application/carregarblognou?blogId=-1">Crear blog...</a>
+                    </div>
+                    <div class="dropdown" style="float: right;">
+                        <button class="dropbtn">${user.nom}</button>
+                        <div class="dropdown-content">
+                            <a href="/Application/LlistaBlogsPerUsuari?nom=${user.nom}">Blogs meus</a>
+                            <a href="/Application/CarregarAdminUsuari">Configuració</a>
+                            <a href="/Application/logout">Desconnectar-se</a>
+                        </div>
+                    </div>
+                #{/if}
+                #{else}
+                    <div class="headerbtn">
+                        <a class="dropbtn" id="no-deco" href="/Application/index">Login/Registrar-se</a>
+                    </div>
+                #{/else}
+            </div>
+        #{doLayout /}
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        #{get 'moreScripts' /}
+        </div>
+    </body>
+
+</html>

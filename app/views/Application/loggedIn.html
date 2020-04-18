@@ -1,0 +1,56 @@
+#{extends 'main.html' /}
+#{set title:'Pàgina d\'usuari' /}
+
+
+	<br>
+<h2>Llistat de blogs de <i>${usuari_visualitzat.nom}</i></h2>
+
+<br><br>
+
+#{if blogs}
+<center>
+<table>
+    <thead>
+    <tr>
+    	<th>Títol</th>
+        <th>Tema</th>
+        <th>Valoració</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    #{list blogs, as:'blog'}
+    <tr>
+    	<td>${blog.titol}</td>
+        <td>${blog.tema}</td>
+        <td>${blog.valoracio}</td>
+        <td>
+        	#{form @CarregarBlog()}
+            <p class="buttons">
+            <input type="submit" value="Mostrar" id="megaboto"/>
+            <input type="hidden" name="id" value="${blog.id}" />
+            </p>
+            #{/form}
+        </td>
+        <td>
+        	#{form @CarregarBlogNou()}
+            <p class="buttons">
+ 			<input type="hidden" name="blogId" value="${blog.id}" />
+            <input type="submit" value="Editar" id="megaboto"/>
+            </p>
+            #{/form}
+        </td>
+    </tr>
+    #{/list}
+    </tbody>
+</table>
+</center>
+#{/if}
+#{else}
+<p style="text-align: center;">
+    No hi han resultats
+</p>
+#{/else}
+
+

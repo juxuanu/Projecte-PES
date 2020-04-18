@@ -1,0 +1,56 @@
+#{extends 'main.html' /}
+#{set title:'Blog nou' /}
+
+#{if user}
+<center>
+<div id="editor-blog">
+#{form @CrearBlogNou()}
+
+#{field 'titol'}
+<br>
+<label>
+	Títol
+</label>
+<br>
+<input type="text" name="${field.name}" id="titolBlog"><br>
+#{/field}
+#{field 'tema'}
+<br>
+<label>
+	Tema
+</label>
+<br>
+<input type="text" name="${field.name}" id="temaBlog"><br>
+#{/field}
+#{field 'contingut'}
+<br>
+<label>
+	Text
+</label>
+<textarea name="${field.name}" id="textBlog"></textarea> 
+#{/field}
+<br><br><br>
+
+#{if blog}
+<button type="submit" id="megaboto">Editar</button>
+<input type="hidden" name="idBlog" value="${blog.id}" />
+#{/if}
+#{else}
+<button type="submit" id="megaboto">Publicar</button>
+#{/else}
+#{/form}
+</div>
+</center>
+#{if blog}
+
+<script type="text/javascript">
+	document.getElementById("titolBlog").setAttribute('value',"${blog.titol}");
+	document.getElementById("temaBlog").setAttribute('value',"${blog.tema}");
+	document.getElementById("textBlog").setAttribute('value',"${blog.contingut}");
+</script>
+
+#{/if}
+#{/if}
+#{else}
+<p> Inicia sessió per crear un blog nou!</p>
+#{/else}

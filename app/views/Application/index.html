@@ -1,0 +1,142 @@
+#{extends 'main.html' /}
+#{set title:'Login / Registre' /}
+
+
+<div id="login-registre">
+
+    <h2>Identifica't</h2>
+
+
+    #{form @login()}
+    <table>
+    #{field 'user.nom'}
+	<tr>
+    	<td>
+        	Nom d'usuari:
+		</td>
+		<td>
+			<p class="field">
+				<input type="text"  size="19" name="${field.name}" />
+			</p>
+		</td>
+	</tr>
+    #{/field}
+
+    #{field 'user.contra'}
+
+    <tr>
+    	<td>
+        	Contrasenya:
+		</td>
+		<td>
+			<p class="field">
+				<input type="password"  size="19" name="${field.name}" />
+			</p>
+		</td>
+	</tr>
+
+   
+    #{/field}
+
+<tr>
+    	<td>
+        	
+		</td>
+		<td>
+			 <p class="buttons">
+        <input type="submit" value="Login"  id="megaboto"/>
+    </p>
+		</td>
+	</tr>
+
+   
+	</table>
+    #{/form}
+
+    <div style="display:inline-block;">
+    <h2>Registra't</h2>
+
+
+    #{form @Registrar()}
+    <table>
+    #{field 'usuari.nom'}
+
+  <tr>
+    	<td>
+        	Nom d'usuari:
+		</td>
+		<td>
+			 
+    <p class="field">
+        
+        <input type="text"  size="19" name="${field.name}" />
+    </p>
+		</td>
+	</tr>
+
+    #{/field}
+
+    #{field 'usuari.contra'}
+
+     <tr>
+    	<td>
+        	Contrasenya:
+		</td>
+		<td>
+			<p class="field">
+        
+        <input type="password"  size="19" name="${field.name}"/>
+    </p>
+		</td>
+	</tr>
+
+    
+    #{/field}
+
+     #{field 'usuari.mail'}
+
+     <tr>
+    	<td>
+        	Correu electrònic:
+		</td>
+		<td>
+			<p class="field">
+        <input type="text"  size="19" name="${field.name}"/>
+    </p>
+		</td>
+	</tr>
+    
+    #{/field}
+
+     #{field 'usuari.naixament'}
+
+       <tr>
+    	<td>
+        	Data de naixament:
+		</td>
+		<td>
+			<p class="field">
+      
+        <input type="text"  size="19" name="${field.name}"/>
+    </p>
+		</td>
+	</tr>
+    
+    #{/field}
+
+
+       <tr>
+    	<td>
+        	
+		</td>
+		<td>
+			<p class="buttons">
+        <input type="submit" value="Registrar-se"  id="megaboto"/>
+    </p>
+		</td>
+	</tr>
+    
+	</table>
+    #{/form}
+</div>
+</div>

@@ -1,0 +1,48 @@
+#{extends 'main.html' /}
+#{set title:'Blog ${blog.titol}' /}
+
+	<div id="contingut-blog">
+		<h2>${blog.titol}</h2>
+		<h3>Tema: ${blog.tema}</h3>
+		<br>
+		<div id="text-blog">
+			${blog.contingut}
+		</div>
+		
+	</div>
+	<p id="valorar">
+		Valoració: ${blog.valoracio}#{if user} | <a href="/Application/ValorarBlog?idBlog=${blog.id}&val=0"><img src="@{'/public/images/dislike.png'}"></a> <a href="/Application/ValorarBlog?idBlog=${blog.id}&val=1"><img src="@{'/public/images/like.png'}"></a>#{/if}
+	</p><br>
+		#{list blog.comentaris, as:'comentari'}
+		<tr>
+		<div id="comentari">
+			<div id="header-comentari">
+    			<td><b>${comentari.autor.nom}</b> ha comentat:</td>
+        		<td><div style="float: right;"> Valoració: ${comentari.valoracio}</div> </td>
+        	</div>
+        	<hr>
+        	<td><p id="contingut-comentari">${comentari.contingut}</p></td>
+        </div>
+    	</tr>
+    	#{/list}
+    	#{if user}
+    	<div id="nou_comentari">
+    	#{form @BotoComentar()}
+    	#{field 'contingut'}
+    	<p class="field">
+        	<textarea maxlength="255" type="text" name="${field.name}" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue">Comentari nou...</textarea>
+    	</p>
+    	#{/field}
+		<p class="buttons">
+			<input type="hidden" name="blogId" value="${blog.id}" />
+        	<input type="submit" value="Comentar"  id="megaboto"/>
+    	</p>
+    	
+    		<label><img src="@{'/public/images/warning.png'}" style="display: inline;"> El comentari serà públic com a <b>${user.nom}</b></label>
+    	#{/form}
+    	#{/if}
+    	#{else}
+    		<label>No pots comentar com a anònim. Inicia sessió primer.</label>
+    	#{/else}
+    	</div>
+    	
