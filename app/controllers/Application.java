@@ -81,7 +81,13 @@ public class Application extends Controller {
       if(n!=null){
         Usuari u = Usuari.find("byNom",n).first();
         if(u!=null){
-            //u.delete();    <--- implementar
+            for(Blog b: u.blogs){
+              b.delete();
+            }
+            for(Comentari c: u.comentaris){
+              c.delete();
+            }
+            u.delete();
             session.remove("user");
             index();
         }
