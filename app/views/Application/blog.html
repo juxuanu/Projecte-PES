@@ -30,14 +30,13 @@
     	#{form @BotoComentar()}
     	#{field 'contingut'}
     	<p class="field">
-        	<textarea maxlength="255" type="text" name="${field.name}" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue">Comentari nou...</textarea>
+        	<textarea id="textcomentari" maxlength="255" type="text" name="${field.name}" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue">Comentari nou...</textarea>
     	</p>
     	#{/field}
-		<p class="buttons">
-			<input type="hidden" name="blogId" value="${blog.id}" />
-        	<input type="submit" value="Comentar"  id="megaboto"/>
+			<p class="buttons">
+				<input type="hidden" name="blogId" value="${blog.id}"/>
+      	<input type="submit" value="Comentar" id="megaboto"/>
     	</p>
-
     		<label><img src="@{'/public/images/warning.png'}" style="display: inline;"> El comentari serà públic com a <b>${user.nom}</b></label>
     	#{/form}
     	#{/if}
