@@ -34,12 +34,14 @@
             #{/form}
         </td>
         <td>
+					#{if blog.autor.nom == user.nom}
         	#{form @CarregarBlogNou()}
             <p class="buttons">
  			<input type="hidden" name="blogId" value="${blog.id}" />
             <input type="submit" value="Editar" id="megaboto"/>
             </p>
             #{/form}
+					#{/if}
         </td>
     </tr>
     #{/list}
@@ -52,5 +54,3 @@
     No hi han resultats
 </p>
 #{/else}
-
-
