@@ -2,11 +2,16 @@
   box-sizing: border-box;
 }
 
-table { border-collapse: collapse; }
-tr { border: none; }
+table {
+  border-collapse: collapse;
+}
+tr {
+  border: none;
+}
 td {
     padding:0 15px;
 }
+
 #titol_main{
 	text-align: center;
 	background-color: darkgreen;
@@ -16,9 +21,6 @@ td {
 	animation-direction: alternate;
 }
 
-#titol {
-
-}
 #nou_comentari{
 	border: solid 1px black;
 	border-radius: 5px;
@@ -145,7 +147,6 @@ body{
 #valorar a:hover{
   background-color: yellow;
 }
-
 
 #modificar-usuari {
 	text-align: justify;
