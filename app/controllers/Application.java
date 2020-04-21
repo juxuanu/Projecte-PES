@@ -35,7 +35,8 @@ public class Application extends Controller {
         	Usuari u2 = new Usuari(); u2.nom = user.nom;
             session.put("user", u2.nom);
             LlistaBlogsPerUsuari(u2.nom);
-        }else {
+        }
+        else {
             renderText("Error de login");
         }
     }
@@ -134,7 +135,6 @@ public class Application extends Controller {
     		if(b==null) renderText("El blog a modificar no existeix!");
     		renderArgs.put("blog",b);
     	}
-
     	renderTemplate("Application/blognou.html");
     }
 
