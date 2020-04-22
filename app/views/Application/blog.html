@@ -15,6 +15,7 @@
 	<p style="float:right;">
 		Valoració: ${blog.valoracio}#{if user} | <a href="/Application/ValorarBlog?idBlog=${blog.id}&val=0"><img src="@{'/public/images/dislike.png'}"></a> <a href="/Application/ValorarBlog?idBlog=${blog.id}&val=1"><img src="@{'/public/images/like.png'}"></a>#{/if}
 	</p>
+		#{if user}
 		#{if blog.autor.nom == user.nom}
 		#{form @CarregarBlogNou()}
 			<p class="buttons" style="float: left;">
@@ -22,6 +23,7 @@
 				<input type="submit" value="Editar" id="megaboto"/>
 			</p>
 		#{/form}
+		#{/if}
 		#{/if}
 	</div>
 	<div style="clear:both;">

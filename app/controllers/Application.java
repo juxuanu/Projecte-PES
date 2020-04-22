@@ -111,7 +111,7 @@ public class Application extends Controller {
 		  String n = session.get("user");
     	if(n!=null){
     		Usuari u = new Usuari(); u.nom = n;
-    		renderArgs.put("user",u);
+        renderArgs.put("user",u);
     	}
     	Blog b = Blog.find("byId",id).first();
     	if(b != null){
