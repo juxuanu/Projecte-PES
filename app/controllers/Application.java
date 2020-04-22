@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Application extends Controller {
 
     public static void index() {
-        String n = session.get("user");
+      String n = session.get("user");
     	if(n!=null){
     		LlistaBlogsPerUsuari(n);
     	}
@@ -30,15 +30,15 @@ public class Application extends Controller {
     }
 
     public static void login(@Valid Usuari user){
-        Usuari u = Usuari.find("byNomAndContra", user.nom, user.contra).first();
-        if(u != null) {
-        	Usuari u2 = new Usuari(); u2.nom = user.nom;
-            session.put("user", u2.nom);
-            LlistaBlogsPerUsuari(u2.nom);
-        }
-        else {
-            renderText("Error de login");
-        }
+      Usuari u = Usuari.find("byNomAndContra", user.nom, user.contra).first();
+      if(u != null) {
+      	Usuari u2 = new Usuari(); u2.nom = user.nom;
+          session.put("user", u2.nom);
+          LlistaBlogsPerUsuari(u2.nom);
+      }
+      else {
+          renderText("Error de login");
+      }
     }
 
     public static void LlistaBlogsPerUsuari(String nom){
@@ -47,21 +47,22 @@ public class Application extends Controller {
     		Usuari u = new Usuari(); u.nom = n;
     		renderArgs.put("user",u);
     	}
-        validation.required(nom);
-        if(validation.hasErrors()) {
-            renderText("Cap usuari a visualitzar.");
-        }
-        if(Objects.equals(nom,"<usuari_eliminat>"))
-          renderText("Usuari no existeix");
-        Usuari u = Usuari.find("byNom",nom).first();
-        if (u!=null) {
-            List<Blog> blogs = u.blogs;
-            renderArgs.put("usuari_visualitzat",u);
-            renderArgs.put("blogs",u.blogs);
-            renderTemplate("Application/loggedIn.html");
-        }else {
-            renderText("Error amb el nom d'usuari");
-        }
+      validation.required(nom);
+      if(validation.hasErrors()) {
+        renderText("Cap usuari a visualitzar.");
+      }
+      if(Objects.equals(nom,"<usuari_eliminat>"))
+        renderText("Usuari no existeix");
+      Usuari u = Usuari.find("byNom",nom).first();
+      if (u!=null) {
+        List<Blog> blogs = u.blogs;
+        renderArgs.put("usuari_visualitzat",u);
+        renderArgs.put("blogs",u.blogs);
+        renderTemplate("Application/loggedIn.html");
+      }
+      else {
+        renderText("Error amb el nom d'usuari");
+      }
     }
 
     public static void Registrar(@Valid Usuari usuari) {
@@ -69,14 +70,14 @@ public class Application extends Controller {
     	validation.required(usuari.contra);
     	validation.required(usuari.mail);
     	validation.required(usuari.naixament);
-        if (Usuari.find("byNom",usuari.nom).first() == null && !validation.hasErrors()) {
-            usuari.create();
-            session.put("user", usuari.nom);
-    		LlistaBlogsPerUsuari(usuari.nom);
-        }
-        else {
-            renderText("L'usuari ja existeix o les dades no són vàlides.");
-        }
+      if (Usuari.find("byNom",usuari.nom).first() == null && !validation.hasErrors()) {
+        usuari.create();
+        session.put("user", usuari.nom);
+    	  LlistaBlogsPerUsuari(usuari.nom);
+      }
+      else {
+          renderText("L'usuari ja existeix o les dades no són vàlides.");
+      }
     }
 
     public static void BorrarUsuari(){
@@ -85,20 +86,20 @@ public class Application extends Controller {
         Usuari u = Usuari.find("byNom",n).first();
         Usuari anon = Usuari.find("byNom","<usuari_eliminat>").first();
         if(u!=null){
-            for(Blog b: u.blogs){
-              b.autor = anon;
-              b.save();
-            }
-            for(Comentari c: u.comentaris){
-              c.autor = anon;
-              c.save();
-            }
-            u.delete();
-            session.remove("user");
-            index();
+          for(Blog b: u.blogs){
+            b.autor = anon;
+            b.save();
+          }
+          for(Comentari c: u.comentaris){
+            c.autor = anon;
+            c.save();
+          }
+          u.delete();
+          session.remove("user");
+          index();
         }
         else
-            renderText("Usuari no trobat.");
+          renderText("Usuari no trobat.");
       }
     }
 
@@ -107,7 +108,7 @@ public class Application extends Controller {
     }
 
     public static void CarregarBlog(long id){
-		String n = session.get("user");
+		  String n = session.get("user");
     	if(n!=null){
     		Usuari u = new Usuari(); u.nom = n;
     		renderArgs.put("user",u);
@@ -127,7 +128,7 @@ public class Application extends Controller {
     		Usuari u = new Usuari(); u.nom = n;
     		renderArgs.put("user",u);
     	}
-    	else{
+    	else {
     		renderText("Login primer!");
     	}
     	if(blogId>0){	//Això vol dir que estem editant un blog, no creant-lo
@@ -141,19 +142,19 @@ public class Application extends Controller {
     public static void BotoComentar(String contingut, int blogId){
     	String n = session.get("user");
     	if(n!=null){
-        	if(!(contingut == null || contingut.contains("Comentari nou...") || contingut.trim().length() == 0 || contingut.length() == 0)){
-            	Usuari u = Usuari.find("byNom",n).first();
-            	Blog b = Blog.find("byId",(long)blogId).first();
-            	if(b!=null){
-            		Comentari c = new Comentari(contingut, b, u);
-            		c.save();
-            		CarregarBlog((long)blogId);
-            	}
-            	else
-            		renderText("El blog no existeix!");
+        if(!(contingut == null || contingut.contains("Comentari nou...") || contingut.trim().length() == 0 || contingut.length() == 0)){
+        	Usuari u = Usuari.find("byNom",n).first();
+        	Blog b = Blog.find("byId",(long)blogId).first();
+        	if(b!=null){
+        		Comentari c = new Comentari(contingut, b, u);
+        		c.save();
+        		CarregarBlog((long)blogId);
         	}
         	else
-        		renderText("Introdueix un comentari vàlid.");
+        		renderText("El blog no existeix!");
+        }
+        else
+        	renderText("Introdueix un comentari vàlid.");
     	}
     	else
     		renderText("Inicia sessió per comentar!");
