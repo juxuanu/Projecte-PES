@@ -27,6 +27,9 @@
 		#{/if}
 	</div>
 	<div style="clear:both;">
+		#{if blog.comentaris.size() == 0}
+		<p style="color: darkred;"><b>Cap comentari</b></p>
+		#{/if}
 		#{list blog.comentaris, as:'comentari'}
 		<tr>
 		<div id="comentari">
@@ -55,7 +58,7 @@
     	#{/form}
     	#{/if}
     	#{else}
-    		<label>No pots comentar com a anònim. Inicia sessió primer.</label>
+    		<label>No pots comentar com a anònim. #{a @index()}Inicia sessió#{/a} primer.</label>
     	#{/else}
     	</div>
 	</div>
