@@ -29,6 +29,15 @@ public class Application extends Controller {
     	renderTemplate("Application/index.html");
     }
 
+    public static String login_android(String usuari, String contrasenya){
+      Usuari user = Usuari.find("byNomAndContra",usuari,contrasenya).first();
+      if(user != null) {
+        session.put("user","user.nom");
+        return "LOGIN_OK";
+      }
+      return "LOGIN_ERROR";
+    }
+
     public static void login(@Valid Usuari user){
       Usuari u = Usuari.find("byNomAndContra", user.nom, user.contra).first();
       if(u != null) {
