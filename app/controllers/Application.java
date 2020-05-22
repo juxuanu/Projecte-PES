@@ -38,6 +38,19 @@ public class Application extends Controller {
       return "LOGIN_ERROR";
     }
 
+	public static String register_android(String usuari, String contrasenya, String mail, String naixament){
+		Usuari user = Usuari.find("byNom",usuari).first();
+		if(isNullOrEmpty(usuari) || isNullOrEmpty(contrasenya) || isNullOrEmpty(mail) || isNullOrEmpty(naixament)) 
+			return "REGISTER_INVALID";
+		if(user == null){
+			Usuari nou = new Usuari(usuari,contrasenya,mail,naixament);
+			nou.save();
+			session.put("user","nou.nom");
+			return "REGISTER_OK";
+		}
+		return "REGISTER_USEREXISTS";
+	}
+
     public static void login(@Valid Usuari user){
       Usuari u = Usuari.find("byNomAndContra", user.nom, user.contra).first();
       if(u != null) {
