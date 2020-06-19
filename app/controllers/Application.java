@@ -164,7 +164,7 @@ public class Application extends Controller {
     public static void BotoComentar(String contingut, int blogId){
     	String n = session.get("user");
     	if(n!=null){
-        if(!(contingut == null || contingut.contains("Comentari nou...") || contingut.trim().length() == 0 || contingut.length() == 0)){
+        if(!(isNullOrEmpty(contingut) || Objects.equals(contingut,"Comentari nou..."))){
         	Usuari u = Usuari.find("byNom",n).first();
         	Blog b = Blog.find("byId",(long)blogId).first();
         	if(b!=null){
