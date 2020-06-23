@@ -12,7 +12,16 @@ import models.*;
 import javax.persistence.*;
 
 public class Application extends Controller {
+/* 
+En cada mètode on es fa un render, es mira primer si l'usuari ha fet login
+i si ho ha fet, es passen uns renderArgs adequats. Equivalent a utilitzar el mòdul
+de Security però fet a ma. 
+*/
 
+	/*
+	Mètode que es crida a / (GET /).
+	Mostra la pàgina de login en cas que no estiguis loguejat. 
+	*/
     public static void index() {
       String n = session.get("user");
     	if(n!=null){
@@ -63,6 +72,9 @@ public class Application extends Controller {
       }
     }
 
+	/*
+	Mostra la pagina html amb una llista dels blogs d'un usuari
+	*/
     public static void LlistaBlogsPerUsuari(String nom){
     	String n = session.get("user");
     	if(n!=null){
@@ -77,7 +89,6 @@ public class Application extends Controller {
         renderText("Usuari no existeix");
       Usuari u = Usuari.find("byNom",nom).first();
       if (u!=null) {
-        List<Blog> blogs = u.blogs;
         renderArgs.put("usuari_visualitzat",u);
         renderArgs.put("blogs",u.blogs);
         renderTemplate("Application/loggedIn.html");
@@ -102,6 +113,10 @@ public class Application extends Controller {
       }
     }
 
+	/*
+	Per no perdre el contingut generat per l'usuari a borrar,
+	assignem l'autor a <usuari_eliminat> abans de borrar-lo.
+	*/
     public static void BorrarUsuari(){
       String n = session.get("user");
       if(n!=null){
@@ -125,10 +140,7 @@ public class Application extends Controller {
       }
     }
 
-    public static void CarregarLoggedIn(){
-    	LlistaBlogsPerUsuari(session.get("user"));
-    }
-
+	// Mostrar un blog
     public static void CarregarBlog(long id){
 		  String n = session.get("user");
     	if(n!=null){
@@ -144,6 +156,10 @@ public class Application extends Controller {
     		renderText("Blog no trobat (id = " + id + ")");
     }
 
+	/*
+	Mostrar la pàgina per crear un blog nou, 
+	a més, també serveix per carregar un blog a modificar.
+	*/
     public static void CarregarBlogNou(int blogId){
     	String n = session.get("user");
     	if(n!=null){
@@ -161,6 +177,7 @@ public class Application extends Controller {
     	renderTemplate("Application/blognou.html");
     }
 
+	// Mètode cridat quan apretes el botó de comentar en un blog.
     public static void BotoComentar(String contingut, int blogId){
     	String n = session.get("user");
     	if(n!=null){
@@ -182,6 +199,7 @@ public class Application extends Controller {
     		renderText("Inicia sessió per comentar!");
     }
 
+	// Mètode necessari per poguer afegir valoracions numèriques a un blog
     public static void ValorarBlog(int idBlog, int val){
     	//val: 1 -> +1 | altre -> -1
     	Blog b = Blog.find("byId",(long)idBlog).first();
@@ -197,6 +215,7 @@ public class Application extends Controller {
     		renderText("El blog no existeix!");
     }
 
+	// Mètode necessari per poguer afegir valoracions numèriques a un comentari
     public static void ValorarComentari(int idComentari, int val){
       Comentari c = Comentari.find("byId",(long)idComentari).first();
       if(c!=null){
@@ -209,15 +228,9 @@ public class Application extends Controller {
       }
     }
 
-    public static void buscarBlogs(){
-      String n = session.get("user");
-      if(n!=null){
-    		Usuari u = new Usuari(); u.nom = n;
-    		renderArgs.put("user",u);
-    	}
-      render();
-    }
-
+	/*
+	El "camp" ens indica si buscar per tema, titol o autor.
+	*/
     public static void BuscarBlog(String camp, String searchString){
       if (Objects.equals(camp,"titol")){
         List<Blog> blogs = Blog.find("byTitol",searchString).fetch();
@@ -253,6 +266,7 @@ public class Application extends Controller {
         "titol, autor o tema");
     }
 
+	// Mètode per mostrar la àgina on es modifiquen les dades de l'usuari.
     public static void CarregarAdminUsuari(){
     	String n = session.get("user");
     	if(n!=null){
@@ -265,6 +279,7 @@ public class Application extends Controller {
     		renderText("Inicia sessió primer");
     }
 
+	// Mètode cridat en apretar el botó d'OK en la pagina de modificar usuari.
     public static void ModificarUsuari(Usuari usuariModificat){
     	String n = session.get("user");
     	if(n!=null){
@@ -282,6 +297,8 @@ public class Application extends Controller {
     		renderText("Sessió no iniciada. Què vols modificar si no entres al teu usuari primer?");
     }
 
+	// Com a Java no pots comprovar si un String és null, està buit i/o és només espais en blanc,
+	// Aquest mètode et permet comprovar-ho.
     private static Boolean isNullOrEmpty(String s){
     	if(s == null || s.trim().length() == 0 || s.length() == 0 || s == ""){
     		return true;
@@ -289,6 +306,7 @@ public class Application extends Controller {
     	else return false;
     }
 
+	// Mètode cridat en apretar el botó de Publicar en la pàgina de crear un blog nou.
     public static void CrearBlogNou(String titol, String tema, String contingut, long idBlog){
     	//idBlog > 0 -> modificar, idBlog <=0 -> crear
     	String n = session.get("user");

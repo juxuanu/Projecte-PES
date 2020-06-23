@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// Els usuaris poden ser autors de comentaris i de blogs.
 @Entity
 public class Usuari extends Model {
 

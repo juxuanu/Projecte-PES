@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 import java.util.List;
 
+// Cada comentari és d'un usuari i està en un sol blog 
 @Entity
 public class Comentari extends Model {
 

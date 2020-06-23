@@ -14,6 +14,8 @@ import java.util.List;
 @Entity
 public class Blog extends Model {
 
+    // El contingut és un Character Large OBject perquè cal esperar 
+    // molta quantitat de carácters en publicacions grans
     @Lob
     @Column(columnDefinition="CLOB")
     public String contingut;
