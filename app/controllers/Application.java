@@ -12,15 +12,15 @@ import models.*;
 import javax.persistence.*;
 
 public class Application extends Controller {
-/* 
+/*
 En cada mètode on es fa un render, es mira primer si l'usuari ha fet login
 i si ho ha fet, es passen uns renderArgs adequats. Equivalent a utilitzar el mòdul
-de Security però fet a ma. 
+de Security però fet a ma.
 */
 
 	/*
 	Mètode que es crida a / (GET /).
-	Mostra la pàgina de login en cas que no estiguis loguejat. 
+	Mostra la pàgina de login en cas que no estiguis loguejat.
 	*/
     public static void index() {
       String n = session.get("user");
@@ -49,7 +49,7 @@ de Security però fet a ma.
 
 	public static String register_android(String usuari, String contrasenya, String mail, String naixament){
 		Usuari user = Usuari.find("byNom",usuari).first();
-		if(isNullOrEmpty(usuari) || isNullOrEmpty(contrasenya) || isNullOrEmpty(mail) || isNullOrEmpty(naixament)) 
+		if(isNullOrEmpty(usuari) || isNullOrEmpty(contrasenya) || isNullOrEmpty(mail) || isNullOrEmpty(naixament))
 			return "REGISTER_INVALID";
 		if(user == null){
 			Usuari nou = new Usuari(usuari,contrasenya,mail,naixament);
@@ -157,7 +157,7 @@ de Security però fet a ma.
     }
 
 	/*
-	Mostrar la pàgina per crear un blog nou, 
+	Mostrar la pàgina per crear un blog nou,
 	a més, també serveix per carregar un blog a modificar.
 	*/
     public static void CarregarBlogNou(int blogId){
@@ -304,6 +304,21 @@ de Security però fet a ma.
     		return true;
     	}
     	else return false;
+    }
+
+    // Mètode necessari per mostrar la pàgina de búsqueda de blogs
+    public static void buscarBlogs(){
+      String n = session.get("user");
+      if(n!=null){
+        Usuari u = new Usuari(); u.nom = n;
+        renderArgs.put("user",u);
+      }
+      render();
+    }
+
+    // Carregar la llista de blog per usuari de l'usuari que ha iniciat sessio actualment
+    public static void CarregarLoggedIn(){
+      LlistaBlogsPerUsuari(session.get("user"));
     }
 
 	// Mètode cridat en apretar el botó de Publicar en la pàgina de crear un blog nou.
